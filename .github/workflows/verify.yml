@@ -1,0 +1,41 @@
+name: Arbitrage Scanner — tests, deployed Worker, live sources
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deterministic-tests-and-bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-audit --no-fund
+      - name: Calculation, order-book, threshold and fail-closed tests
+        run: npm test
+      - name: Bundle Cloudflare Worker (does not deploy)
+        run: npm run build-check
+  deployed-worker-paper-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Public worker health, fixture positive/skip, audit fields
+        run: node scripts/smoke-deployed.mjs
+  live-market-read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Actual two market books and Pharos Atlantic RPC
+        run: node scripts/verify-live.mjs
