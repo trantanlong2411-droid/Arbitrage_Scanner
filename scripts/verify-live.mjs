@@ -7,8 +7,11 @@ for(let attempt=1;attempt<=3;attempt++){
  try{
   const r=await fetch(base+'/api/scan',{method:'POST',headers:{'content-type':'application/json'},
    body:JSON.stringify({config}),signal:AbortSignal.timeout(25000)});
-  response=await r.json();
-  if(!r.ok||!response.ok)throw Error('LIVE API '+r.status+' '+JSON.stringify(response).slice(0,450));
+  const bodyText=await r.text();
+  console.log('LIVE HTTP DIAGNOSTIC',JSON.stringify({status:r.status,contentType:r.headers.get('content-type'),
+    responseSnippet:bodyText.slice(0,900)}));
+  try{response=JSON.parse(bodyText);}catch(e){throw Error('Non-JSON response HTTP '+r.status+' '+bodyText.slice(0,300));}
+  if(!r.ok||!response.ok)throw Error('LIVE API '+r.status+' '+JSON.stringify(response).slice(0,600));
   break;
  }catch(e){last=e;response=null; if(attempt<3)await new Promise(r=>setTimeout(r,4000))}
 }
