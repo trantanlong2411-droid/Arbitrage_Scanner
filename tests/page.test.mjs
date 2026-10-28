@@ -15,3 +15,9 @@ test('Inline javascript syntax parses successfully',()=>{
  assert.ok(script.length);
  for(const [,body] of script)new Script(body,{filename:'scanner-inline.js'});
 });
+
+test('Every attempted scan, including provider failures, gets an ERROR_NO_TRADE log',()=>{
+ assert.match(HTML,/decision:'ERROR_NO_TRADE'/);
+ assert.match(HTML,/transactionBroadcast:false,action:'NO_TRADE'/);
+ assert.match(HTML,/history.unshift\(failed\)/);
+});
