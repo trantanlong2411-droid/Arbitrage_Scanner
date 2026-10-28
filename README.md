@@ -10,6 +10,14 @@ This is a conservative **PAPER TRADING / SIMULATED EXECUTION** scanner. It compa
 
 Crucially: ETH/USD markets here are on **off-chain centralized exchanges**, **not two Pharos DEX pools**. Gas from Pharos Atlantic is shown for task demonstration; it would **not be a real fee for an off-chain Coinbase/Kraken trade**. The native testnet gas token PHRS has **no claimed USD market price** here: the user must enter an **assumed PHRS/USD** to illustrate the cost. This is a what-if calculation, **NOT an executable real arbitrage opportunity**. Exchange transfers, deposit delays, account balances, funding/rebalancing, regulatory and settlement costs are excluded. Quotes are point-in-time indicative, not guaranteed fills. Trading fee assumptions are user-supplied estimates. No actual orders, swaps or blockchain transactions occur.
 
+## Public verified evidence
+
+- [Automated tests + actual live two-source scan](https://github.com/trantanlong2411-droid/Arbitrage_Scanner/actions/workflows/verify.yml).
+- The `live-market-read` job calls the deployed `/api/scan` route, confirms provider names Coinbase/Kraken, two valid ETH/USD bid/ask books, Pharos Atlantic chain ID 688689, a positive on-chain gas quote, complete fee/slippage/gas analysis, and a risk-gated decision.
+- Download artifact `verified-live-arbitrage-scan` from the most recent successful run to obtain a date-stamped `live-scan.json` (GitHub artifacts expire after 30 days).
+- A recent real scan correctly returned `SKIP`. No claim is made that an arbitrage opportunity exists or that a simulated fill was executed in real markets.
+- The deterministic positive demo triggers `SIMULATE` with fully labeled synthetic price sources; deterministic negative demo triggers `SKIP`. Neither is live market proof.
+
 ## Challenge mapping
 
 | Challenge requirement | Implementation |

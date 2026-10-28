@@ -1,3 +1,4 @@
+import {mkdir,writeFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 const base=process.env.SCANNER_BASE_URL||'https://arbitrage-scanner.trantanlong2411.workers.dev';
 const config={quantityEth:0.2,minNetUsd:2,coinbaseFeeBps:35,krakenFeeBps:40,
@@ -29,3 +30,14 @@ console.log('LIVE TWO-SOURCE SCAN VERIFIED',JSON.stringify({
  bestDirection:s.best,quoteSkewMs:s.quoteSkewMs,
  caveat:'CEX public price quotes and testnet PHRS/USD assumption. NOT executable on-chain arbitrage.'
 },null,2));
+
+await mkdir('proof',{recursive:true});
+await writeFile('proof/live-scan.json',JSON.stringify({
+ evidenceType:'public-live-market-scan',
+ recordedBy:'GitHub Actions live-market-read',
+ sourceMode:s.sourceMode,
+ scannedAt:s.scannedAt,
+ scan:s,
+ disclaimer:'Time-specific Coinbase/Kraken public order book observation; Pharos Atlantic gas USD is hypothetical and user-configurable. No real trade was made.'
+},null,2)+'\n');
+console.log('EVIDENCE SAVED proof/live-scan.json');

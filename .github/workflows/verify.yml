@@ -39,3 +39,11 @@ jobs:
           node-version: '22'
       - name: Actual two market books and Pharos Atlantic RPC
         run: node scripts/verify-live.mjs
+      - name: Publish machine-readable live scan evidence
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-live-arbitrage-scan
+          path: proof/live-scan.json
+          retention-days: 30
+          if-no-files-found: error
