@@ -12,7 +12,7 @@ Crucially: ETH/USD markets here are on **off-chain centralized exchanges**, **no
 
 ## Browser-exported audit proof
 
-- [October 28 browser audit summary](./proof/README.md) from a user-submitted 14-scan JSON export (6 LIVE attempts, 8 synthetic demos). All live completed scans correctly SKIP; two Coinbase HTTP 429 errors fail closed.
+- [October 28 browser audit — 17 scans](./proof/README.md) from a user-submitted latest 17-scan JSON export (7 LIVE attempts, 10 synthetic demos). All 5 completed LIVE scans correctly SKIP; two Coinbase HTTP 429 errors fail closed.
 - The public website now limits repeated LIVE scans with a short cooldown after each request, retaining fail-closed behavior and separate synthetic test buttons.
 
 ## Public verified evidence

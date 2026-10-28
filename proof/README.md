@@ -1,35 +1,44 @@
-# User browser audit — 28 October 2026
+# Browser audit evidence: 17 scans (28 October 2026)
 
-This report summarizes a user-supplied exported JSON from the deployed Arbitrage Scanner interface. It is not an independently authenticated historical market-data archive and should be considered **browser-generated evidence**. For a reproducible, independently collected scan, see the [GitHub Actions live-market-read job](https://github.com/trantanlong2411-droid/Arbitrage_Scanner/actions/workflows/verify.yml), which uploads a separate 30-day JSON artifact.
+This is a condensed summary from a user-exported JSON file from the [deployed Arbitrage Scanner](https://arbitrage-scanner.trantanlong2411.workers.dev/). It is **not** an independent historical market price archive. All results are read-only paper-trade calculations with no wallet signatures.
 
-## Summary
+## Latest evidence
 
-- 14 scans recorded between 17:31:13 and 17:32:07 UTC on 28 October 2026.
-- 6 LIVE attempts: 4 SKIP (net-negative), 2 ERROR_NO_TRADE (Coinbase HTTP 429); **0 live profitable opportunities**.
-- 8 SYNTHETIC_DEMO runs: 4 SIMULATE (simulated positive), 4 SKIP (simulated negative).
-- No transactions were signed or broadcast, as intended.
+- Original browser export: `pharos-arbitrage-scans-1793210365013.json`, exported at `2026-10-28T17:59:25.011Z`.
+- SHA-256 of the original unmodified file: `0f557f467109804bc2c151c3ac25f71474c48f817d196647401817d026ebd339`. The original full JSON is held by the user; only a derived summary is committed here.
+- **17 scans**: 7 LIVE (5 SKIP, 2 `ERROR_NO_TRADE`) and 10 SYNTHETIC_DEMO (5 SIMULATE, 5 SKIP).
+- No positive-profit LIVE scan and no broadcast trade. Positive outcomes are distinctly labeled synthetic.
+- Two Coinbase HTTP 429 rate limits occurred earlier; source failure was logged and caused no trade.
 
-| Case | Gross spread | Swap fees | Slippage reserve | Assumed testnet gas | Net result | Decision |
+| Example | Gross spread | Exchange fees | Slippage reserve | Illustrative Pharos gas | Net | Decision |
 |---|---:|---:|---:|---:|---:|---|
-| Live ETH/USD, 0.2 ETH | $0.024 | $6.295236 | $1.398924 | $0.000312 | -$7.670472 | SKIP |
-| Synthetic demo, 0.2 ETH | $20.00 | $5.60 | $1.23 | $0.000312 | +$13.169688 | SIMULATE |
-| Live Coinbase 429 | n/a | n/a | n/a | n/a | n/a | ERROR_NO_TRADE |
+| LIVE, 2026-10-28 17:59:12Z | $0.116 | $3.512924 | $1.405158 | $0.000312 | -$4.802394 | SKIP |
+| SYNTHETIC_DEMO, 2026-10-28 17:59:13Z | $20.000 | $3.080000 | $1.230000 | $0.000312 | +$15.689688 | SIMULATE |
 
-The testnet gas USD valuation is a **user-configured assumption**, not a market price and not an actual cost of Coinbase/Kraken orders. The code and page label this as non-executable paper-trading / educational comparison.
+`gasCostUsd` is a **testnet PHRS/USD assumption**, not the real gas fee for a centralized exchange transaction. Coinbase and Kraken provide public off-chain price books, not Pharos DEX pools.
 
-[Machine-readable condensed 14-scan audit summary](./browser-audit-summary-2026-10-28.json)
+The file is consistent with the threshold rule `netProfitUsd > minNetUsd` for SIMULATE. LIVE losses and HTTP errors correctly produce SKIP/ERROR_NO_TRADE. Coinbase documents public API IP rate-limiting and HTTP 429 ([official docs](https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits)).
 
-## Coinbase HTTP 429
+[Machine-readable 17-scan summary](./browser-audit-summary-2026-10-28-1759.json)
 
-Coinbase documents IP-based public API limits and HTTP 429. The Worker does not silently substitute synthetic books on a failed live source. The UI now enforces a short client-side LIVE scan cooldown; on a provider 429 response it respects a bounded server-provided retry interval when available. This reduces accidental repeated calls, but does not guarantee elimination of global IP-level limits.
+Reviewers can independently check the **internal arithmetic and file integrity** if given the exported original file:
 
-See [official Coinbase API rate limits](https://docs.cdp.coinbase.com/exchange/rest-api/rate-limits).
+```sh
+node scripts/verify-browser-export.mjs pharos-arbitrage-scans-1793210365013.json
+```
 
-## How to reproduce for reviewer
+The verifier checks SHA-256, all 17 decisions, source labels, fee/slippage/gas arithmetic, no transaction broadcast and the threshold. It does not authenticate external historical orderbook prices.
 
-1. Open [live public app](https://arbitrage-scanner.trantanlong2411.workers.dev/).
-2. Run Scan LIVE books. Examine two source timestamps, VWAP, spread, fees, slippage, assumed testnet gas, net and decision.
-3. Run Demo: profitable, then Demo: skip. Both use clearly labeled synthetic samples and never real trades.
-4. Export JSON evidence and cross-check with [GitHub CI](https://github.com/trantanlong2411-droid/Arbitrage_Scanner/actions).
+## Separate CI-verified LIVE evidence
 
-Simulation is explicitly accepted by the challenge, but the comparison across two centralized exchanges does not constitute an on-chain DEX arbitrage and may be assessed differently by reviewers.
+[GitHub Actions runs](https://github.com/trantanlong2411-droid/Arbitrage_Scanner/actions/workflows/verify.yml) independently call the two live market APIs plus Pharos Atlantic testnet RPC. The latest successful `live-market-read` job uploads `verified-live-arbitrage-scan` for download. These CI artifacts are the best separate evidence of actually contacting two market sources, and are not interchangeable with synthetic demo results.
+
+## Previous export
+
+[14-scan summary (earlier export, preserved)](./browser-audit-summary-2026-10-28.json) — this earlier evidence was superseded by the newer 17-scan user export but remains available for auditing the progression.
+
+## Reviewer walkthrough
+
+Open the public website, click **Scan LIVE books**, verify the separate source quotes and decision after costs. Then use **Demo: profitable** (synthetic profitable `SIMULATE`) and **Demo: skip** (synthetic unprofitable `SKIP`), and export JSON. A missing live source must fail closed rather than switching to fake data.
+
+The task accepts simulated execution, but reviewers may assess cross-CEX quotes differently from actual on-chain Pharos DEX arbitrage.

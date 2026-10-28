@@ -1,0 +1,175 @@
+{
+  "title": "User-exported browser Arbitrage Scanner audit — 17 records",
+  "type": "DERIVED_USER_BROWSER_EXPORT_SUMMARY",
+  "originalFileName": "pharos-arbitrage-scans-1793210365013.json",
+  "originalExportedAt": "2026-10-28T17:59:25.011Z",
+  "rawFileSHA256": "0f557f467109804bc2c151c3ac25f71474c48f817d196647401817d026ebd339",
+  "summaryCaveat": "Summarized from user-supplied browser JSON, not independently authenticated historical market quotes. Exact full source file is not stored in this repository. No live transaction has been executed.",
+  "scanCount": 17,
+  "intervalUtc": {
+    "first": "2026-10-28T17:31:13.093Z",
+    "last": "2026-10-28T17:59:14.837Z"
+  },
+  "sourceCounts": {
+    "LIVE": 7,
+    "SYNTHETIC_DEMO": 10
+  },
+  "decisionCounts": {
+    "SIMULATE": 5,
+    "SKIP": 10,
+    "ERROR_NO_TRADE": 2
+  },
+  "crossTab": {
+    "LIVE": {
+      "SIMULATE": 0,
+      "SKIP": 5,
+      "ERROR_NO_TRADE": 2
+    },
+    "SYNTHETIC_DEMO": {
+      "SIMULATE": 5,
+      "SKIP": 5,
+      "ERROR_NO_TRADE": 0
+    }
+  },
+  "records": [
+    {
+      "scannedAt": "2026-10-28T17:59:14.837Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:59:13.861Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:59:12.973Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.802394
+    },
+    {
+      "scannedAt": "2026-10-28T17:32:07.534Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -6.541002
+    },
+    {
+      "scannedAt": "2026-10-28T17:32:06.404Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 13.169688
+    },
+    {
+      "scannedAt": "2026-10-28T17:32:05.744Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -7.670472
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:38.729Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:38.257Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:37.554Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:31.963Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:30.472Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.935068
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:29.077Z",
+      "sourceMode": "LIVE",
+      "decision": "ERROR_NO_TRADE",
+      "bestNetUsd": null
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:27.393Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:26.099Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.880844
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:24.061Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.863309
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:20.746Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:13.093Z",
+      "sourceMode": "LIVE",
+      "decision": "ERROR_NO_TRADE",
+      "bestNetUsd": null
+    }
+  ],
+  "examples": [
+    {
+      "scannedAt": "2026-10-28T17:59:12.973Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "buyAt": "Coinbase",
+      "sellAt": "Kraken",
+      "quantityEth": 0.2,
+      "grossSpreadUsd": 0.116,
+      "swapFeesUsd": 3.512924,
+      "slippageReserveUsd": 1.405158,
+      "gasCostUsd": 0.000312,
+      "netProfitUsd": -4.802394
+    },
+    {
+      "scannedAt": "2026-10-28T17:59:13.861Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "quantityEth": 0.2,
+      "grossSpreadUsd": 20,
+      "swapFeesUsd": 3.08,
+      "slippageReserveUsd": 1.23,
+      "gasCostUsd": 0.000312,
+      "netProfitUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:29.077Z",
+      "sourceMode": "LIVE",
+      "decision": "ERROR_NO_TRADE",
+      "reason": "Coinbase Exchange HTTP 429"
+    }
+  ],
+  "conclusion": "All LIVE successful scans SKIP (negative net); synthetic profitable cases prepare paper trades only. 429 errors log ERROR_NO_TRADE. Network PHRS/USD is an assumed testnet conversion and not the actual cost of Coinbase/Kraken trading.",
+  "execution": {
+    "signed": false,
+    "transactionBroadcast": false
+  }
+}
