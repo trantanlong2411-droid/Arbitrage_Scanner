@@ -10,6 +10,11 @@ This is a conservative **PAPER TRADING / SIMULATED EXECUTION** scanner. It compa
 
 Crucially: ETH/USD markets here are on **off-chain centralized exchanges**, **not two Pharos DEX pools**. Gas from Pharos Atlantic is shown for task demonstration; it would **not be a real fee for an off-chain Coinbase/Kraken trade**. The native testnet gas token PHRS has **no claimed USD market price** here: the user must enter an **assumed PHRS/USD** to illustrate the cost. This is a what-if calculation, **NOT an executable real arbitrage opportunity**. Exchange transfers, deposit delays, account balances, funding/rebalancing, regulatory and settlement costs are excluded. Quotes are point-in-time indicative, not guaranteed fills. Trading fee assumptions are user-supplied estimates. No actual orders, swaps or blockchain transactions occur.
 
+## Browser-exported audit proof
+
+- [October 28 browser audit summary](./proof/README.md) from a user-submitted 14-scan JSON export (6 LIVE attempts, 8 synthetic demos). All live completed scans correctly SKIP; two Coinbase HTTP 429 errors fail closed.
+- The public website now limits repeated LIVE scans with a short cooldown after each request, retaining fail-closed behavior and separate synthetic test buttons.
+
 ## Public verified evidence
 
 - [Automated tests + actual live two-source scan](https://github.com/trantanlong2411-droid/Arbitrage_Scanner/actions/workflows/verify.yml).

@@ -21,3 +21,10 @@ test('Every attempted scan, including provider failures, gets an ERROR_NO_TRADE 
  assert.match(HTML,/transactionBroadcast:false,action:'NO_TRADE'/);
  assert.match(HTML,/history.unshift\(failed\)/);
 });
+
+test('Coinbase HTTP 429 triggers rate-limit cooldown without substituting synthetic quotes',()=>{
+ assert.match(HTML,/nextLiveAllowedAt/);
+ assert.match(HTML,/coolDownLive\(/);
+ assert.match(HTML,/r.status===429/);
+ assert.match(HTML,/Demo remains available/);
+});

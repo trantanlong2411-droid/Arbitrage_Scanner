@@ -11,6 +11,14 @@ async function fetchJson(url,opts={}){
  const r=await fetch(url,{...opts,signal:AbortSignal.timeout(12000),
   headers:{'accept':'application/json','user-agent':'PharosArbitrageScanner/1.0 public read-only demo',...(opts.headers||{})},
   cf:{cacheTtl:0,cacheEverything:false}});
+ if(r.status===429){
+  const raw=r.headers.get('Retry-After');
+  const seconds=raw&&/^\d+$/.test(raw)?Math.min(300,Number(raw)):15;
+  const err=new Error(new URL(url).hostname+' rate limited (HTTP 429). Wait at least '+seconds+
+   ' seconds before a new LIVE scan. No trade executed.');
+  err.status=429;err.retryAfterSeconds=seconds;
+  throw err;
+ }
  if(!r.ok)throw Error(new URL(url).hostname+' returned HTTP '+r.status);
  const data=await r.json();
  return {data,observedAt:new Date().toISOString()};
@@ -64,7 +72,8 @@ export default {
    return reply({ok:true,scan:evaluatePair(books,config,gas,{sourceMode:'LIVE'})});
   }catch(e){
    return reply({ok:false,decision:'ERROR_NO_TRADE',sourceMode:isLive?'LIVE':'SYNTHETIC_DEMO',
-    error:'Scan failed closed, nothing executed: '+String(e.message).slice(0,360)},502);
+    retryAfterSeconds:e.status===429?e.retryAfterSeconds:null,
+    error:'Scan failed closed, nothing executed: '+String(e.message).slice(0,360)},e.status===429?429:502);
   }
  }
 };

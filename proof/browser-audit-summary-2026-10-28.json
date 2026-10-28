@@ -1,0 +1,148 @@
+{
+  "title": "Browser audit summary (not complete original export)",
+  "source": "User-uploaded pharos-arbitrage-scans-1793208745725.json, 2026-10-28",
+  "derivedAt": "2026-10-29",
+  "originalExportedAt": "2026-10-28T17:32:25.723Z",
+  "note": "Summarized by assistant from supplied JSON; this is NOT independent verification of historical market quotes. Original full 14-record JSON was exported by the browser and not committed.",
+  "scanCount": 14,
+  "sourceCounts": {
+    "LIVE": 6,
+    "SYNTHETIC_DEMO": 8
+  },
+  "decisions": {
+    "SIMULATE": 4,
+    "SKIP": 8,
+    "ERROR_NO_TRADE": 2
+  },
+  "bySourceAndDecision": {
+    "LIVE": {
+      "SIMULATE": 0,
+      "SKIP": 4,
+      "ERROR_NO_TRADE": 2
+    },
+    "SYNTHETIC_DEMO": {
+      "SIMULATE": 4,
+      "SKIP": 4,
+      "ERROR_NO_TRADE": 0
+    }
+  },
+  "scans": [
+    {
+      "scannedAt": "2026-10-28T17:32:07.534Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -6.541002
+    },
+    {
+      "scannedAt": "2026-10-28T17:32:06.404Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 13.169688
+    },
+    {
+      "scannedAt": "2026-10-28T17:32:05.744Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -7.670472
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:38.729Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:38.257Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:37.554Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SKIP",
+      "bestNetUsd": -4.140642
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:31.963Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:30.472Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.935068
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:29.077Z",
+      "sourceMode": "LIVE",
+      "decision": "ERROR_NO_TRADE",
+      "bestNetUsd": null
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:27.393Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:26.099Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.880844
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:24.061Z",
+      "sourceMode": "LIVE",
+      "decision": "SKIP",
+      "bestNetUsd": -4.863309
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:20.746Z",
+      "sourceMode": "SYNTHETIC_DEMO",
+      "decision": "SIMULATE",
+      "bestNetUsd": 15.689688
+    },
+    {
+      "scannedAt": "2026-10-28T17:31:13.093Z",
+      "sourceMode": "LIVE",
+      "decision": "ERROR_NO_TRADE",
+      "bestNetUsd": null
+    }
+  ],
+  "illustrativeCases": [
+    {
+      "sourceMode": "LIVE",
+      "scannedAt": "2026-10-28T17:32:05.744Z",
+      "decision": "SKIP",
+      "quantityEth": 0.2,
+      "grossSpreadUsd": 0.024,
+      "swapFeesUsd": 6.295236,
+      "slippageReserveUsd": 1.398924,
+      "gasCostUsd": 0.000312,
+      "netProfitUsd": -7.670472,
+      "gasUsdSource": "testnet PHRS/USD assumption"
+    },
+    {
+      "sourceMode": "SYNTHETIC_DEMO",
+      "scannedAt": "2026-10-28T17:32:06.404Z",
+      "decision": "SIMULATE",
+      "quantityEth": 0.2,
+      "grossSpreadUsd": 20,
+      "swapFeesUsd": 5.6,
+      "slippageReserveUsd": 1.23,
+      "gasCostUsd": 0.000312,
+      "netProfitUsd": 13.169688
+    },
+    {
+      "sourceMode": "LIVE",
+      "scannedAt": "2026-10-28T17:31:29.077Z",
+      "decision": "ERROR_NO_TRADE",
+      "error": "Coinbase Exchange HTTP 429 rate limit; no trade or simulated fallback"
+    }
+  ],
+  "tradingExecuted": false,
+  "caveat": "Coinbase and Kraken are off-chain CEX order books. Pharos Atlantic gas is not an actual trading fee for either CEX. No real arbitrage or swaps occur."
+}
